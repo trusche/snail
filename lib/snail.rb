@@ -120,7 +120,8 @@ class Snail
     when 'NL'
       "#{postal_code}  #{city}"
     when 'IE'
-      "#{city}, #{region}"
+      # Dublin City has postcodes but no county.
+      postal_code.to_s =~ /\S/ ? "#{city} #{postal_code}" : "#{city}, #{region}"
     when 'GB', 'RU', 'UA', 'JO', 'LB', 'IR', 'SA', 'NZ'
       "#{city}  #{postal_code}" # Locally these may be on separate lines. The USPS prefers the city line above the country line, though.
     when 'EC'
